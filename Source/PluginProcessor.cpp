@@ -118,14 +118,14 @@ public:
     {
         note = midiNote;
         noteVelocity = velocity;
-        const double seed = (double) (midiNote * 37 + getCurrentlyPlayingChannel() * 13 + 97);
+        const double seed = (double) (midiNote * 37 + 1 * 13 + 97);
         for (int i = 0; i < 7; ++i)
         {
             phase1[(std::size_t) i] = std::fmod (seed * 0.037 + i * 0.173, 1.0);
             phase2[(std::size_t) i] = std::fmod (seed * 0.071 + i * 0.293 + 0.19, 1.0);
         }
         subPhase = std::fmod (seed * 0.113 + 0.37, 1.0);
-        noiseState = 0x9137a5bdu ^ (uint32_t) (midiNote * 719 + getCurrentlyPlayingChannel() * 1543);
+        noiseState = 0x9137a5bdu ^ (uint32_t) (midiNote * 719 + 1 * 1543);
         if (noiseState == 0) noiseState = 1;
         filterL1.reset(); filterL2.reset(); filterR1.reset(); filterR2.reset();
         ampEnvelope.reset();
