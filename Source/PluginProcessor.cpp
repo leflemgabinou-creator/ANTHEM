@@ -281,8 +281,8 @@ AnthemAudioProcessor::AnthemAudioProcessor()
     : AudioProcessor (BusesProperties().withOutput ("Output", juce::AudioChannelSet::stereo(), true)),
       parameters (*this, nullptr, "ANTHEM_STATE", createParameterLayout())
 {
-    for (int i = 0; i < 16; ++i) synth.addVoice (new AnthemVoice (*this));
-    synth.addSound (new AnthemSound());
+   if (parameters.state.getProperty ("currentPreset").toString().isEmpty())
+    loadPreset ("Nights Like This");
     if (parameters.state.getProperty ("currentPreset").toString().isEmpty())
         loadPreset ("Nights Like This");
 }
